@@ -1,0 +1,91 @@
+
+ifup eth0
+yum install  net-tools wget
+
+https://www.nixcraft.com/t/how-to-enable-epel-repository-on-rhel-7/255
+
+On installing the Centos vsn (x = [5,6,7] ) repo in RHEL
+
+# ====
+
+
+Follow instructions at this website:
+
+https://www.tecmint.com/how-to-enable-epel-repository-for-rhel-centos-6-5/
+
+however, replace the out-of-date URL contained in /etc/yum.repos.d/epel.repo
+ with: http://image.edc.renci.org/repo/epel/6/$basearch
+ ... (also : comment out everything but bare [epel] section
+
+
+# ====
+
+[root@localhost ~]# vi /etc/yum.repos.d/centos.repo
+
+[centos]
+name=CentOS $releasever - $basearch
+baseurl=http://ftp.heanet.ie/pub/centos/7/os/$basearch/    (((( 5->7 ))))
+enabled=1
+gpgcheck=0
+
+# ====
+yum install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+
+# ====
+https://packages.irods.org/
+
+====================== DE-HARDENING
+
+yum install nmap-ncat
+systemctl stop firewalld
+
+sudo vi /etc/selinux/config 
+SELINUX=disabled 
+   (where it initially reads 'enforcing')
+
+; then nc -l <myIP> 1247 should answer to nc <sameIP> 1247 from another machine (CAN USE HOST)
+
+======================
+
+POSTGRES (note for docker *dependent on dbus)
+
+follow download, installation links for iRODS below
+  0. installation phase postgresql
+     - yum install postgresql-server
+     - sudo postgresql-setup initdb
+     - edit ~postgres/data/pg_hba.conf :
+         ("trust -> md5" last item on host all all lines(x2)
+     - sudo systemctl start postgresql  (( ** enable ** ))
+     - sudo systemctl enable postgresql 
+  1. EPEL repo should be enabled
+  2. CENTOS repo should be enabled for RedHat7
+  3. irods-server
+
+======================
+======================
+
+  (*1)
+
+http://cutler.io/2012/07/installing-centos-packages-on-red-hat-enterprise-linux/
+
+  (*2)
+
+https://www.linode.com/docs/databases/postgresql/how-to-install-postgresql-relational-databases-on-centos-7/
+
+  (*3)
+
+https://docs.irods.org/4.2.4/getting_started/installation/
+
+  (*4)
+
+--- /etc/sysconfig/network-scripts/ifcfg-eth0
+ONBOOT=no->yes
+NM_CONTROLLED=yes->no
+BOOTPROTO=dhcp->static
+IPADDR=
+NETMASK=
+PEERDNS=no
+--- add nameserver 192.168.122.1 to /etc/resolv.conf
+--- /etc/sysconfig/network:
+GATEWAY=
+
