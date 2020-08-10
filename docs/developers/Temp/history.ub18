@@ -1,0 +1,9 @@
+    5  service postgresql start
+    6  su - postgres -c psql
+       sudo apt remove irods-runtime
+   29  sudo dpkg -i  /irods_packages/irods-{dev,serv,icom,runtime,data*-post}*deb
+   30  ls /var/log/irods
+   31  history >/tmp/history.ub18
+CREATE USER irods WITH PASSWORD 'testpassword';
+CREATE DATABASE "ICAT";
+GRANT ALL PRIVILEGES ON DATABASE "ICAT" TO irods;
