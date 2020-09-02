@@ -68,7 +68,11 @@ vagrant resync
 ```
 
 ---
+
+## Permissions using GDB and RR in a container or VM
+
 <A id="rr_gdb"> </A>
+
 RR and GDB in a libvirt  VM
         `/proc/sys/kernel/yama/ptrace_scope` no higher than 0
         `/proc/sys/kernel/perf_event_paranoid` no higher than  1
