@@ -14,7 +14,7 @@ In terminal #1
     ```
 
     with PID = the parent (not grandparent) irodsServer
-    Note this [info](./appendix_1.md#rr_gdb) if permission errors occur
+    See [here](appendix_1.md#permissions-using-gdb-and-rr-in-a-container-or-vm) if permission errors occur
 
   - Inside the GDB REPL:
     ```
