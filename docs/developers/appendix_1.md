@@ -65,6 +65,8 @@ vagrant ssh     get a secure shell into the VM
 vagrant halt    halts the VM
 vagrant reload  reboot the VM
 vagrant resync
+```
+
 ---
 <A id="rr_gdb"> </A>
 RR and GDB in a libvirt  VM
