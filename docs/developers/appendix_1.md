@@ -93,4 +93,8 @@ Therefore:
        sudo systemctl reload libvirtd
        virsh dumpxml <vm-domain-name>
        ```
+       To discover (in)active domains:
+       ```
+       virsh list [--inactive] 
+       ```
 ```
