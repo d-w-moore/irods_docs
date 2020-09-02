@@ -76,8 +76,8 @@ vagrant resync
 RR and GDB in a libvirt  VM
 
 We need:
-        `/proc/sys/kernel/yama/ptrace_scope` at no higher than 0
-        `/proc/sys/kernel/perf_event_paranoid` at no higher than  1
+  - `/proc/sys/kernel/yama/ptrace_scope` at no higher than 0
+  - `/proc/sys/kernel/perf_event_paranoid` at no higher than  1
         
 Therefore:
    - Change those settings on the host, via `sysctl` 
