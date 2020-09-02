@@ -74,15 +74,23 @@ vagrant resync
 <A id="rr_gdb"> </A>
 
 RR and GDB in a libvirt  VM
-        `/proc/sys/kernel/yama/ptrace_scope` no higher than 0
-        `/proc/sys/kernel/perf_event_paranoid` no higher than  1
+
+We need:
+        `/proc/sys/kernel/yama/ptrace_scope` at no higher than 0
+        `/proc/sys/kernel/perf_event_paranoid` at no higher than  1
+        
 Therefore:
-   - Change those settings on the host, via `sysctl`
-   - Allow them to filter into the VM
-     locate  <domain> | grep '\.xml$'
-     in the XML change cpu tag to:
-     ```
-     <cpu mode="host-passthrough" ... >
-     ```
-     Then on the host machine: sudo systemctl reload libvirtd
+   - Change those settings on the host, via `sysctl` 
+   - Allow these settings to filter into the VM or container
+     For vagrant/libvirt :
+       * On the host: locate  <domain> | grep '\.xml$'
+       * in the XML change cpu tag to:
+       ```
+       <cpu mode="host-passthrough" ... >
+       ```
+       Then on the host machine: 
+       ```
+       sudo systemctl reload libvirtd
+       virsh dumpxml <vm-domain-name>
+       ```
 ```
